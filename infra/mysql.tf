@@ -1,22 +1,24 @@
-/* resource "google_sql_database_instance" "master" {
-    name = "instance_name"
-    database_version = "MYSQL_5_7"
-    region = "${var.region}"
-    settings {
-        tier = "db-n1-standard-2"
-    }
+resource "google_sql_database_instance" "instance" {
+  name             = "demo-api"
+  database_version = "MYSQL_8_0"
+  region           = var.region
+  settings {
+    tier = "db-f1-micro"
+  }
 }
+
 
 resource "google_sql_database" "database" {
-    name = "database_name"
-    instance = "${google_sql_database_instance.master.name}"
-    charset = "utf8"
-    collation = "utf8_general_ci"
+  name      = "api"
+  instance  = google_sql_database_instance.instance.name
+  charset   = "utf8"
+  collation = "utf8_general_ci"
 }
 
+
 resource "google_sql_user" "users" {
-    name = "root"
-    instance = "${google_sql_database_instance.master.name}"
-    host = "%"
-    password = "XXXXXXXXX"
-} */
+  name     = "api"
+  instance = google_sql_database_instance.instance.name
+  host     = "%"
+  password = "mypassw0rd"
+}

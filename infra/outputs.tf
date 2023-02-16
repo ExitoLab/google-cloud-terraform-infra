@@ -17,7 +17,8 @@ output "kubernetes_cluster_host" {
   value       = google_container_cluster.primary.endpoint
   description = "GKE Cluster Host"
 }
-/* 
-output "gcr_location" {
-  value = google_container_registry.registry.image_url
-} */
+
+output "map" {
+  description = "All `google_artifact_registry_repository` resource attributes."
+  value       = try(google_artifact_registry_repository.repository, null)
+}

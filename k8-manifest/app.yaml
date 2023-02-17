@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-api-deployment
+  labels:
+    app: article-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: article-api
+  template:
+    metadata:
+      labels:
+        app: article-api
+    spec:
+      containers:
+      - name: article-api
+        image: gcr.io/fleet-pillar-238009/article-api:latest
+        ports:
+        - containerPort: 80
+        resources: {}
+
+
+
+
+
